@@ -16,7 +16,15 @@ What does it stand for?
 🤔
 
 - What are the equivalent _express_ methods?
+  c post
+  R get
+  u patch
+  D update
 - What are the corresponding _http_ codes?
+  200 **C**
+  201 **R**
+  200 **U**
+  200 **D**
 
 ---
 
