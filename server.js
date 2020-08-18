@@ -18,7 +18,11 @@ express()
   // exercise 1
   .get("/exercise_1/users", getUsers)
   // exercise 2
-  .post("/exercise_1/users", addUser)
+  .post("/exercise_1/users", async (req, res) => {
+    const newUser = req.body;
+    await addUser(newUser);
+    res.json({ ...newUser }).status(201);
+  })
   // handle 404s
   .use((req, res) => res.status(404).type("txt").send("🤷‍♂️"))
 
