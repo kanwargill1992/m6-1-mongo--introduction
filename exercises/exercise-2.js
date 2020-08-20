@@ -41,4 +41,42 @@ const getGreeting = async (req, res) => {
   }
 };
 
-module.exports = { createGreeting, getGreeting };
+const getGreetings = async (req, res) => {
+  const _id = req.params._id;
+
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("exercise-2");
+  const greetings = db.collection("greetings").find().toArray();
+
+  let start = 0;
+  let limit = 25;
+
+  if (req.query.start !== undefined) {
+    start = Number(req.query.start);
+  }
+  if (req.query.limit !== undefined) {
+    limit = Number(req.query.limit);
+  }
+  if (greetings.length > 0) {
+    res.status(200).json({
+      start: start,
+      limit: limit,
+      data: greetings.slice(start, start + limit),
+    });
+  } else {
+    res.status(404).json({ data: "NOT FOUND" });
+  }
+  client.close();
+};
+
+const deleteGreeting = async(req,res)=>{
+  const _id = req.params._id;
+  try{
+    const client = await 
+  }
+}
+
+
+
+module.exports = { createGreeting, getGreeting, getGreetings };
